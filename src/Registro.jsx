@@ -1,4 +1,29 @@
 import { useState } from "react";
+//Validaciones de campos de registro
+const validarCedula=(cedula)=>{
+  const cedulaRegex = /^\d{8,10}$/; 
+      return cedulaRegex.test(cedula); 
+     
+}
+const validarCorreo = (correo) => {
+  const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return correoRegex.test(correo)
+}
+const validarContraseña = (contraseña ) => {
+  const contraseñaRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+  return contraseñaRegex.test(contraseña);
+  
+}
+
+//Validaciones de campos de inicio de sesion 
+const validarCedulaInicio=(cedulaRegistrada)=>{
+  const cedulaRegex = /^\d{8,10}$/; 
+  return cedulaRegex.test(cedulaRegistrada); 
+}
+const validarContraseñaInicio=(contraseñaRegistrada)=>{
+  const contraseñaRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+  return contraseñaRegex.test(contraseñaRegistrada);
+}
 function Registro(){
   
     const [tipoDeDocumento, setTipoDeDocumento] = useState(""); 
@@ -14,7 +39,10 @@ function Registro(){
     const [contraseñaInicio, setContraseñaInicio] = useState("");
     const [errorInicio, setErrorInicio]=useState("")
     const [mostrarContenido, setMostrarContenido]=useState(false);
-  
+
+    const [clickRegistro, setClickRegistro]=useState(true); 
+    const [clickInicio, setClickInicio]=useState(false); 
+
    
 
      //Cambios con estados
@@ -44,8 +72,9 @@ function Registro(){
     setCedulaInicio(e.target.value);
   }
   const cambioContraseñaInicio=(e)=>{
-    setContraseñaInicio(e.target.value); 
+    setContraseñaInicio(e.target.value)
   }
+
   
   //Validar con expresiones los campos de registro
   const ValidacionDeCampos = (event) => {
@@ -108,19 +137,21 @@ function Registro(){
       }
   }
 
-   //Comparacion de usuario registrado 
-   
-
+    const mostrarFormularioInicio =()=>{
+      setClickRegistro(false)
+      setClickInicio(true); 
+    } 
 return(
     <>
-    <form onSubmit={ValidacionDeCampos}>
+  {clickRegistro==true ? 
+    (<form onSubmit={ValidacionDeCampos} value={clickRegistro}>
         <h2>Registrarse</h2>
-        <label htmlFor="select"  >Tipo de documento</label>
+        <label htmlFor="select"  >Tipo de documento</label> 
             <select name="" id="select"  
             value={tipoDeDocumento}
             onChange={cambioTDocumento}>
               <option >Cedula de ciudadania</option>
-              <option>Cedula de extranjeria</option>
+              <option>Cedula de extranjeria</option> 
             </select>
             <label htmlFor="cedula">Documento</label>
             <input type="text" id="cedula"  
@@ -152,19 +183,21 @@ return(
             value={contraseña}
             onChange={cambioContraseña} />
       
-            <button type="submit">Registrarse</button>
-            <p>Ya tienes una cuenta? <a href="">Iniciar sesion</a></p>
-            {error && <p>{error} </p>}
+            <button type="submit"  onClick={mostrarFormularioInicio }>Registrarse</button>
+            <p>Ya tienes una cuenta? <a href="" 
+            onClick={mostrarFormularioInicio}>Iniciar sesion</a></p>
+            {error && <p>{error} </p>} 
 
-    </form>
-
-    <form onSubmit={ValidacionDeCamposInicio}>
-      <h2>Inicio de sesion</h2>
+    </form> 
+):null}
+{clickInicio==true ?
+   ( <form onSubmit={ValidacionDeCamposInicio}  > 
+      <h2>Inicio de sesion</h2> 
       <label htmlFor="TipocedulaInicio">Tipo de cedula</label>
       <select name="" id="TipocedulaInicio">
       <option >Cedula de ciudadania</option>
-      <option>Cedula de extranjeria</option>
-      </select>
+      <option>Cedula de extranjeria</option> 
+      </select> 
 
       <label htmlFor="cedulaInicio">Documento</label>
       <input type="text"  
@@ -177,41 +210,15 @@ return(
       onChange={cambioContraseñaInicio}
       />
       <button type="submit" >Iniciar sesion</button>
-      <p>No tienes una cuenta? <a href="">Registrarse</a></p>
+      <p>No tienes una cuenta? <a href="" >Registrarse</a></p>
       {errorInicio && <p>{errorInicio} </p>}
-        {mostrarContenido==true ? <ContenidoPagina/>: ('')}
-        
-    </form>
+      {mostrarContenido==true ? <ContenidoPagina/>: null}
+    </form> ):
+     null}
     </>
 );
 }
-
-//Validaciones de campos de registro
-const validarCedula=(cedula)=>{
-    const cedulaRegex = /^\d{8,10}$/; 
-        return cedulaRegex.test(cedula); 
-       
-}
-const validarCorreo = (correo) => {
-    const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return correoRegex.test(correo)
-  }
-  const validarContraseña = (contraseña ) => {
-    const contraseñaRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
-    return contraseñaRegex.test(contraseña);
-    
-  }
-
-  //Validaciones de campos de inicio de sesion 
-  const validarCedulaInicio=(cedulaRegistrada)=>{
-    const cedulaRegex = /^\d{8,10}$/; 
-    return cedulaRegex.test(cedulaRegistrada); 
-  }
-  const validarContraseñaInicio=(contraseñaRegistrada)=>{
-    const contraseñaRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
-    return contraseñaRegex.test(contraseñaRegistrada);
-  }
-
+//Muestra contenido inicio de sesion 
   function ContenidoPagina (){
      return(
       <>
