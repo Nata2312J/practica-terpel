@@ -13,7 +13,7 @@ function Registro(){
     const [cedulaInicio, setCedulaInicio] = useState("");
     const [contraseñaInicio, setContraseñaInicio] = useState("");
     const [errorInicio, setErrorInicio]=useState("")
-    const mostrarContenido=useState(false);
+    const [mostrarContenido, setMostrarContenido]=useState(false);
   
    
 
@@ -92,7 +92,7 @@ function Registro(){
            if( cedula==cedulaInicio  ){
             if(contraseña==contraseñaInicio){
               setErrorInicio("SESION INICIADA")
-              mostrarContenido=useState(true); 
+              setMostrarContenido(true)
             }else{
               setErrorInicio("La contraseña es incorrecta")
             }
@@ -179,7 +179,8 @@ return(
       <button type="submit" >Iniciar sesion</button>
       <p>No tienes una cuenta? <a href="">Registrarse</a></p>
       {errorInicio && <p>{errorInicio} </p>}
-        <ContenidoPagina/>
+        {mostrarContenido==true ? <ContenidoPagina/>: ('')}
+        
     </form>
     </>
 );
