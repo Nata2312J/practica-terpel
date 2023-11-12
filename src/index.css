@@ -1,0 +1,15 @@
+#botonEnlace{
+  background: none;
+  border: 0;
+  color: purple;
+  /* cursor: default; */
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+} 
+#botonEnlace:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+

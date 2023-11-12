@@ -87,7 +87,6 @@ function Registro(){
         if (validarContraseña(contraseña)) {
           if (validarCorreo(correo)) {
            if(celular.length==10){
-              setError("Campos validos")
               setCedula(cedula); 
               setContraseña(contraseña)
            }else{
@@ -114,14 +113,11 @@ function Registro(){
     } else
       if (validarCedulaInicio(cedulaInicio)) {
         if (validarContraseñaInicio(contraseñaInicio)) {
-          setErrorInicio("Campos validos")
            setCedulaInicio(cedulaInicio); 
            setContraseñaInicio(contraseñaInicio);
-
            if( cedula==cedulaInicio  ){
             if(contraseña==contraseñaInicio){
-              setErrorInicio("SESION INICIADA")
-              setMostrarContenido(true)
+              setMostrarContenido(true); 
             }else{
               setErrorInicio("La contraseña es incorrecta")
             }
@@ -184,8 +180,8 @@ return(
             onChange={cambioContraseña} />
       
             <button type="submit"  onClick={mostrarFormularioInicio }>Registrarse</button>
-            <p>Ya tienes una cuenta? <a href="" 
-            onClick={mostrarFormularioInicio}>Iniciar sesion</a></p>
+            <p>Ya tienes una cuenta? <button id="botonEnlace"
+            onClick={mostrarFormularioInicio}>Iniciar sesion</button></p>
             {error && <p>{error} </p>} 
 
     </form> 
@@ -223,11 +219,8 @@ return(
      return(
       <>
          <h1>Bienvenidos a la pagina principal</h1>
-         <section>
-
-         </section>
       </>
-     )
+     ); 
  }
   
 export default Registro; 
