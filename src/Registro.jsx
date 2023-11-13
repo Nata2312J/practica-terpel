@@ -26,7 +26,7 @@ const validarContraseñaInicio=(contraseñaRegistrada)=>{
 }
 function Registro(){
   
-    const [tipoDeDocumento, setTipoDeDocumento] = useState(""); 
+    const [tipoDeDocumento, setTipoDeDocumento] = useState(" "); 
     const [cedula, setCedula] = useState("");
     const [nombre, setNombre] = useState("");
     const [apellido, setApellido] = useState("");
@@ -42,6 +42,7 @@ function Registro(){
 
     const [clickRegistro, setClickRegistro]=useState(true); 
     const [clickInicio, setClickInicio]=useState(false); 
+    const [siValida, setSiValida]=useState(false) 
 
    
 
@@ -74,8 +75,6 @@ function Registro(){
   const cambioContraseñaInicio=(e)=>{
     setContraseñaInicio(e.target.value)
   }
-
-  
   //Validar con expresiones los campos de registro
   const ValidacionDeCampos = (e) => {
     e.preventDefault();
@@ -88,13 +87,17 @@ function Registro(){
           if (validarCorreo(correo)) {
            if(celular.length==10){
               setCedula(cedula); 
-              setContraseña(contraseña)
+              setContraseña(contraseña); 
+              setSiValida(true)
+              setError("La cuenta se registró satisfactoriamente"); 
+              setClickRegistro(false)
+              setClickInicio(true)
            }else{
             setError("Ingrese un numero de telefono valido"); 
            }
           } else {
             setError("El correo debe tener un @ seguido de al menos un carácter alfanumérico y un punto seguido de al menos dos caracteres alfabéticos al final");
-          }
+          } 
         } else {
           setError("la contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo")
         }
@@ -102,6 +105,11 @@ function Registro(){
         setError("La CC debe tener entre 8 y 10 digitos y no llevar ningun caracter especial ");
       }
     }
+  }
+  
+  const mostrarFormInicioEnlace=()=>{
+    setClickRegistro(false);
+    setClickInicio(true);
   }
 
   //Validar con elas expresiones los campos de inicio
@@ -134,13 +142,10 @@ function Registro(){
       }
   }
 
-    const mostrarFormularioInicio =()=>{
-      setClickRegistro(false)
-      setClickInicio(true); 
-    } 
+   
 return(
-    <>
-  {clickRegistro==true && {ValidacionDeCampos} ? 
+    <> 
+  {clickRegistro==true ? 
     (<form onSubmit={ValidacionDeCampos} value={clickRegistro} className="registrarseFormulario">
         <h2>Registrarse</h2> 
         <label htmlFor="select"  >Tipo de documento</label> 
@@ -180,14 +185,13 @@ return(
             value={contraseña}
             onChange={cambioContraseña} />
       
-            <button type="submit"  onClick={mostrarFormularioInicio }>Registrarse</button>
+            <button type="submit" >Registrarse</button>
+            {error && <p>{error}</p>}  
             <p>Ya tienes una cuenta? <button id="botonEnlace"
-            onClick={mostrarFormularioInicio}
+            onClick={mostrarFormInicioEnlace}
             >Iniciar sesion</button></p>
-            {error && <p>{error}</p>} 
-
-    </form> 
-):null}
+          
+    </form> ):null}
 {clickInicio==true ?
    ( <form onSubmit={ValidacionDeCamposInicio}  > 
       <h2>Inicio de sesion</h2> 
