@@ -3,8 +3,10 @@ import Registro from './Registro'
 
 
 function App() {
-
+       const [ clickInicio,setClickInicio]=useState(false); 
+      console.log(setClickInicio)
   return (
+
     <>
     <header className='headerViveTerpel'>
       <img src="src\logoViveTerpel.png" alt="LogoVIveTerpel" className='logoViveTerpel' />
@@ -55,7 +57,10 @@ function App() {
       </div>
      </article> 
      </section>
+     
+    
         <Registro/>
+        
     </>
   ); 
 }

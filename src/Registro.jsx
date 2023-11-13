@@ -44,8 +44,6 @@ function Registro(){
     const [clickInicio, setClickInicio]=useState(false); 
     const [siValida, setSiValida]=useState(false) 
 
-   
-
      //Cambios con estados
 
   const cambioTDocumento = (e) => {
@@ -89,7 +87,6 @@ function Registro(){
               setCedula(cedula); 
               setContraseña(contraseña); 
               setSiValida(true)
-              setError("La cuenta se registró satisfactoriamente"); 
               setClickRegistro(false)
               setClickInicio(true)
            }else{
@@ -126,7 +123,7 @@ function Registro(){
            if( cedula==cedulaInicio  ){
             if(contraseña==contraseñaInicio){
               setMostrarContenido(true); 
-              
+              setClickInicio(false)
             }else{
               setErrorInicio("La contraseña es incorrecta")
             }
@@ -214,9 +211,10 @@ return(
       <button type="submit" >Iniciar sesion</button>
       <p>No tienes una cuenta? <a href="" >Registrarse</a></p>
       {errorInicio && <p>{errorInicio} </p>}
-      {mostrarContenido==true ? <ContenidoPagina/>: null}
     </form> ):
      null}
+   {mostrarContenido==true ? <ContenidoPagina/>: null}
+
     </>
 );
 }
@@ -224,9 +222,9 @@ return(
   function ContenidoPagina (){
      return(
       <>
-         <h1>Bienvenidos a la pagina principal</h1>
+          <h3>Sesion iniciada</h3>
       </>
      ); 
- }
+ } 
   
 export default Registro; 
