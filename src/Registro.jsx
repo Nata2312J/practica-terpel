@@ -77,8 +77,8 @@ function Registro(){
 
   
   //Validar con expresiones los campos de registro
-  const ValidacionDeCampos = (event) => {
-    event.preventDefault();
+  const ValidacionDeCampos = (e) => {
+    e.preventDefault();
     if (cedula == "" || contraseña == "" || nombre == "" || apellido == "" || celular == "" || correo == "") {
       setError("Todos los campos son obligatorios"); 
       return
@@ -118,6 +118,7 @@ function Registro(){
            if( cedula==cedulaInicio  ){
             if(contraseña==contraseñaInicio){
               setMostrarContenido(true); 
+              
             }else{
               setErrorInicio("La contraseña es incorrecta")
             }
@@ -139,9 +140,9 @@ function Registro(){
     } 
 return(
     <>
-  {clickRegistro==true ? 
-    (<form onSubmit={ValidacionDeCampos} value={clickRegistro}>
-        <h2>Registrarse</h2>
+  {clickRegistro==true && {ValidacionDeCampos} ? 
+    (<form onSubmit={ValidacionDeCampos} value={clickRegistro} className="registrarseFormulario">
+        <h2>Registrarse</h2> 
         <label htmlFor="select"  >Tipo de documento</label> 
             <select name="" id="select"  
             value={tipoDeDocumento}
@@ -181,8 +182,9 @@ return(
       
             <button type="submit"  onClick={mostrarFormularioInicio }>Registrarse</button>
             <p>Ya tienes una cuenta? <button id="botonEnlace"
-            onClick={mostrarFormularioInicio}>Iniciar sesion</button></p>
-            {error && <p>{error} </p>} 
+            onClick={mostrarFormularioInicio}
+            >Iniciar sesion</button></p>
+            {error && <p>{error}</p>} 
 
     </form> 
 ):null}

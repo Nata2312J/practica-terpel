@@ -7,24 +7,29 @@ function App() {
   return (
     <>
     <header className='headerViveTerpel'>
-      <div>
       <img src="src\logoViveTerpel.png" alt="LogoVIveTerpel" className='logoViveTerpel' />
-      </div>
+    <div>
       <a href="">Inicio</a>
       <a href="">¿Cómo funciona?</a>
       <a href="">Mapas</a>
       <a href="">Aliados</a>
       <a href="">Centro de ayuda</a>
+      <button>Iniciar sesion</button>
+      <button >Registrarse</button>
+      </div>
     </header> 
      
+     <section className='principalRegistro'>
      <main className='mainViveTerpel'>
-      <button>Conocenos</button>
+      <button className='conocenos'>Conocenos</button>
       <h1>¿Qué es ViveTerpel?</h1>
       <p>Descubre nuestro nuevo programa de beneficios en el que acomulas puntos facil y rapido y los vives de verdad, disfrutrando como quieres.</p>
       <button className='edsParticipantesBoton'>Conoce EDS participantes</button>
      </main>
 
+   
      <article className='articleViveTerpel'>
+     <div>
       <section>
         <img src="src\registrate.png" alt="" />
         <h3>Registrate y gana puntos</h3>
@@ -35,6 +40,8 @@ function App() {
         <h3>Puntos por tus compras</h3>
         <p>Recuerda dar tu cedula al comprar en una EDS participante o cualquier tienda Altoque para acumular puntos.</p>
       </section>
+      </div>
+      <div>
       <section>
       <img src="src\estacionesCercanas.png" alt="" />
         <h3>Estaciones más cercanas</h3>
@@ -45,7 +52,9 @@ function App() {
         <h3>Beneficios exclusivos para ti</h3>
         <p>Por ser parte de ViveTerpel disfrutas de promociones únicas, descuentos increíbles y beneficios exclusivos.</p>
       </section>
+      </div>
      </article> 
+     </section>
         <Registro/>
     </>
   ); 
